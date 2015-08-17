@@ -1,0 +1,21 @@
+{
+    "generator-jhipster": {
+        "baseName": "Treadstone",
+        "packageName": "com.treadstone",
+        "packageFolder": "com/treadstone",
+        "authenticationType": "session",
+        "hibernateCache": "ehcache",
+        "clusteredHttpSession": "no",
+        "websocket": "no",
+        "databaseType": "sql",
+        "devDatabaseType": "mysql",
+        "prodDatabaseType": "mysql",
+        "searchEngine": "no",
+        "useCompass": false,
+        "buildTool": "maven",
+        "frontendBuilder": "grunt",
+        "javaVersion": "8",
+        "enableTranslation": false,
+        "rememberMeKey": "e4ef6c8aa2f287041efb99972077c6ac492ad147"
+    }
+}
