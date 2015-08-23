@@ -207,3 +207,24 @@ ul#strengthBar {
     background-color: #eee;
     opacity: 1;
 }
+
+.student {
+    border-radius: 5px;
+    background: #68B3AF;
+    width: 75px;
+    height: 25px;
+}
+
+.course {
+    border-radius: 5px;
+    background: #87BDB1;
+    width: 75px;
+    height: 25px;
+}
+
+.assignment {
+    border-radius: 5px;
+    background: #AACCB1;
+    width: 125px;
+    height: 25px;
+}

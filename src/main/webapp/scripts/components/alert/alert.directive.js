@@ -52,7 +52,6 @@ angular.module('treadstoneApp')
                     var addErrorAlert = function (message, key, data) {
                         AlertService.error(message);
                     }
-
                 }
             ]
         }

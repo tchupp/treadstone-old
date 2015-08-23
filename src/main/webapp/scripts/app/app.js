@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('treadstoneApp', ['LocalStorageModule',
+var app = angular.module('treadstoneApp', ['LocalStorageModule',
     'ui.bootstrap', // for modal dialogs
     'ngResource', 'ui.router', 'ngCookies', 'ngCacheBuster', 'ngFileUpload', 'infinite-scroll'])
 
@@ -64,9 +64,7 @@ angular.module('treadstoneApp', ['LocalStorageModule',
                 ]
             }
         });
-
         $httpProvider.interceptors.push('errorHandlerInterceptor');
         $httpProvider.interceptors.push('authExpiredInterceptor');
         $httpProvider.interceptors.push('notificationInterceptor');
-
     });

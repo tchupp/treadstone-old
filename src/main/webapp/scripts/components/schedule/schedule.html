@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-md-4">
+        <p>Courses</p>
+
+        <div ng-repeat="course in courses">
+            <p class="course">{{ course.name }}</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <p>Assignments</p>
+
+        <div ng-repeat="assignment in assignments">
+            <p class="assignment">{{ assignment.name }}</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <p>Students</p>
+
+        <div ng-repeat="student in students">
+            <p class="student">{{ student.name }}</p>
+        </div>
+    </div>
+</div>

@@ -9,7 +9,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css assets/styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css assets/styles/main.css -->
@@ -17,10 +17,7 @@
     <!-- endbuild -->
 </head>
 <body ng-app="treadstoneApp">
-<!--[if lt IE 9]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
+
 <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
 <div ui-view="navbar" ng-cloak=""></div>
 <div class="container">
@@ -92,6 +89,8 @@
 <script src="scripts/components/interceptor/notification.interceptor.js"></script>
 <script src="scripts/components/navbar/navbar.controller.js"></script>
 <script src="scripts/components/navbar/navbar.directive.js"></script>
+<script src="scripts/components/schedule/schedule.controller.js"></script>
+<script src="scripts/components/schedule/schedule.directive.js"></script>
 <script src="scripts/components/user/user.service.js"></script>
 <script src="scripts/components/util/base64.service.js"></script>
 <script src="scripts/components/util/dateutil.service.js"></script>
