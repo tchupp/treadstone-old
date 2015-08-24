@@ -1,0 +1,46 @@
+<div>
+    <h2><span>Course</span> {{course.id}}</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>CourseId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{course.courseId}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CourseName</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{course.courseName}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Credits</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{course.credits}}" readonly>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="course"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

@@ -1,0 +1,38 @@
+<div>
+    <h2><span>Semester</span> {{semester.id}}</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>SemesterId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{semester.semesterId}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>SemesterName</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{semester.semesterName}}" readonly>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="semester"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

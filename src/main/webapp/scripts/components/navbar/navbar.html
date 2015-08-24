@@ -7,7 +7,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/"><span>Treadstone</span> <span class="navbar-version">v{{VERSION}}</span></a>
+            <a class="navbar-brand" href="#/"><span>Treadstone</span><span
+                class="navbar-version">v{{VERSION}}</span></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse" ng-switch="isAuthenticated()">
             <ul class="nav navbar-nav nav-pills navbar-right">
@@ -28,6 +29,18 @@
                                 </span>
                     </a>
                     <ul class="dropdown-menu">
+                        <li ui-sref-active="active"><a ui-sref="major"><span
+                            class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span>major</span></a></li>
+                        <li ui-sref-active="active"><a ui-sref="semester"><span
+                            class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span>semester</span></a></li>
+                        <li ui-sref-active="active"><a ui-sref="course"><span
+                            class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span>course</span></a></li>
+                        <li ui-sref-active="active"><a ui-sref="student"><span
+                            class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span>student</span></a></li>
                         <!-- JHipster will add entities to the menu here -->
                     </ul>
                 </li>

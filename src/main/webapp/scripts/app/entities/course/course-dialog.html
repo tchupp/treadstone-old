@@ -1,0 +1,63 @@
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myCourseLabel">Create or edit a Course</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id" ng-model="course.id" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="field_courseId">CourseId</label>
+            <input type="text" class="form-control" name="courseId" id="field_courseId"
+                   ng-model="course.courseId" required>
+
+            <div ng-show="editForm.courseId.$invalid">
+                <p class="help-block" ng-show="editForm.courseId.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="field_courseName">CourseName</label>
+            <input type="text" class="form-control" name="courseName" id="field_courseName"
+                   ng-model="course.courseName" required>
+
+            <div ng-show="editForm.courseName.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.courseName.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="field_credits">Credits</label>
+            <input type="number" class="form-control" name="credits" id="field_credits"
+                   ng-model="course.credits" required>
+
+            <div ng-show="editForm.credits.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.credits.$error.required">
+                    This field is required.
+                </p>
+
+                <p class="help-block"
+                   ng-show="editForm.credits.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

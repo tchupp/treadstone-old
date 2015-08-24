@@ -1,0 +1,38 @@
+<div>
+    <h2><span>Major</span> {{major.id}}</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>MajorId</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{major.majorId}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MajorName</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{major.majorName}}" readonly>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="major"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
