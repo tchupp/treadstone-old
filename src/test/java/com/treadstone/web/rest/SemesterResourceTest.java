@@ -136,8 +136,8 @@ public class SemesterResourceTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.[*].id").value(hasItem(semester.getId().intValue())))
-            .andExpect(jsonPath("$.[*].semesterId").value(hasItem(DEFAULT_SEMESTER_ID.toString())))
-            .andExpect(jsonPath("$.[*].semesterName").value(hasItem(DEFAULT_SEMESTER_NAME.toString())));
+            .andExpect(jsonPath("$.[*].semesterId").value(hasItem(DEFAULT_SEMESTER_ID)))
+            .andExpect(jsonPath("$.[*].semesterName").value(hasItem(DEFAULT_SEMESTER_NAME)));
     }
 
     @Test
@@ -151,8 +151,8 @@ public class SemesterResourceTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(semester.getId().intValue()))
-            .andExpect(jsonPath("$.semesterId").value(DEFAULT_SEMESTER_ID.toString()))
-            .andExpect(jsonPath("$.semesterName").value(DEFAULT_SEMESTER_NAME.toString()));
+            .andExpect(jsonPath("$.semesterId").value(DEFAULT_SEMESTER_ID))
+            .andExpect(jsonPath("$.semesterName").value(DEFAULT_SEMESTER_NAME));
     }
 
     @Test

@@ -40,6 +40,5 @@ describe('Services Tests ', function () {
             expect(spiedAuthServerProvider.logout).toHaveBeenCalled();
             expect(spiedLocalStorageService.clearAll).toHaveBeenCalled();
         });
-
     });
 });

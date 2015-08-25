@@ -82,9 +82,7 @@ public class Course implements Serializable {
 
         Course course = (Course) o;
 
-        if (!Objects.equals(id, course.id)) return false;
-
-        return true;
+        return Objects.equals(id, course.id);
     }
 
     @Override

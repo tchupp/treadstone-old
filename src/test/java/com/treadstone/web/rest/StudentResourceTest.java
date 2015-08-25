@@ -39,8 +39,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class StudentResourceTest {
 
-    private static final String DEFAULT_STUDENT_ID = "SAMPLE_TEXT";
-    private static final String UPDATED_STUDENT_ID = "UPDATED_TEXT";
+    private static final String DEFAULT_STUDENT_ID = "6CHARS";
+    private static final String UPDATED_STUDENT_ID = "UPDATE";
 
     @Inject
     private StudentRepository studentRepository;
@@ -114,7 +114,7 @@ public class StudentResourceTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.[*].id").value(hasItem(student.getId().intValue())))
-            .andExpect(jsonPath("$.[*].studentId").value(hasItem(DEFAULT_STUDENT_ID.toString())));
+            .andExpect(jsonPath("$.[*].studentId").value(hasItem(DEFAULT_STUDENT_ID)));
     }
 
     @Test
@@ -128,7 +128,7 @@ public class StudentResourceTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(student.getId().intValue()))
-            .andExpect(jsonPath("$.studentId").value(DEFAULT_STUDENT_ID.toString()));
+            .andExpect(jsonPath("$.studentId").value(DEFAULT_STUDENT_ID));
     }
 
     @Test

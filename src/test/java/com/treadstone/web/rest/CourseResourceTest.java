@@ -159,8 +159,8 @@ public class CourseResourceTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.[*].id").value(hasItem(course.getId().intValue())))
-            .andExpect(jsonPath("$.[*].courseId").value(hasItem(DEFAULT_COURSE_ID.toString())))
-            .andExpect(jsonPath("$.[*].courseName").value(hasItem(DEFAULT_COURSE_NAME.toString())))
+            .andExpect(jsonPath("$.[*].courseId").value(hasItem(DEFAULT_COURSE_ID)))
+            .andExpect(jsonPath("$.[*].courseName").value(hasItem(DEFAULT_COURSE_NAME)))
             .andExpect(jsonPath("$.[*].credits").value(hasItem(DEFAULT_CREDITS)));
     }
 
@@ -175,8 +175,8 @@ public class CourseResourceTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(course.getId().intValue()))
-            .andExpect(jsonPath("$.courseId").value(DEFAULT_COURSE_ID.toString()))
-            .andExpect(jsonPath("$.courseName").value(DEFAULT_COURSE_NAME.toString()))
+            .andExpect(jsonPath("$.courseId").value(DEFAULT_COURSE_ID))
+            .andExpect(jsonPath("$.courseName").value(DEFAULT_COURSE_NAME))
             .andExpect(jsonPath("$.credits").value(DEFAULT_CREDITS));
     }
 

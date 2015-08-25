@@ -9,9 +9,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-/**
- * A Major.
- */
 @Entity
 @Table(name = "MAJOR")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -22,14 +19,10 @@ public class Major implements Serializable {
     private Long id;
 
     @NotNull
-
-
     @Column(name = "major_id", nullable = false)
     private String majorId;
 
     @NotNull
-
-
     @Column(name = "major_name", nullable = false)
     private String majorName;
 
@@ -68,9 +61,7 @@ public class Major implements Serializable {
 
         Major major = (Major) o;
 
-        if (!Objects.equals(id, major.id)) return false;
-
-        return true;
+        return Objects.equals(id, major.id);
     }
 
     @Override

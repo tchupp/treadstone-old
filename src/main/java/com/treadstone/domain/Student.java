@@ -10,9 +10,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-/**
- * A Student.
- */
 @Entity
 @Table(name = "STUDENT")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -24,8 +21,6 @@ public class Student implements Serializable {
 
     @NotNull
     @Size(min = 6, max = 6)
-
-
     @Column(name = "student_id", length = 6, nullable = false)
     private String studentId;
 
@@ -78,9 +73,7 @@ public class Student implements Serializable {
 
         Student student = (Student) o;
 
-        if (!Objects.equals(id, student.id)) return false;
-
-        return true;
+        return Objects.equals(id, student.id);
     }
 
     @Override

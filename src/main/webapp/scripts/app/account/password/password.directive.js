@@ -6,19 +6,13 @@ angular.module('treadstoneApp')
         return {
             replace: true,
             restrict: 'E',
-            template: '<div id="strength">' +
-            '<small translate="global.messages.validate.newpassword.strength">Password strength:</small>' +
-            '<ul id="strengthBar">' +
-            '<li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li>' +
-            '</ul>' +
-            '</div>',
+            templateUrl: 'scripts/app/account/password/passwordStrengthBar.html',
             link: function (scope, iElement, attr) {
                 var strength = {
                     colors: ['#F00', '#F90', '#FF0', '#9F0', '#0F0'],
-                    mesureStrength: function (p) {
-
+                    measureStrength: function (p) {
                         var _force = 0;
-                        var _regex = /[$-/:-?{-~!"^_`\[\]]/g; // "
+                        var _regex = /[$-/:-?{-~!"^_`\[\]]/g;
 
                         var _lowerLetters = /[a-z]+/.test(p);
                         var _upperLetters = /[A-Z]+/.test(p);
@@ -68,7 +62,7 @@ angular.module('treadstoneApp')
                 };
                 scope.$watch(attr.passwordToCheck, function (password) {
                     if (password) {
-                        var c = strength.getColor(strength.mesureStrength(password));
+                        var c = strength.getColor(strength.measureStrength(password));
                         iElement.removeClass('ng-hide');
                         iElement.find('ul').children('li')
                             .css({'background': '#DDD'})

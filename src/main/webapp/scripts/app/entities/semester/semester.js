@@ -41,7 +41,7 @@ angular.module('treadstoneApp')
                 parent: 'semester',
                 url: '/new',
                 data: {
-                    roles: ['ROLE_ADMIN'],
+                    roles: ['ROLE_USER']
                 },
                 onEnter: ['$stateParams', '$state', '$modal', function ($stateParams, $state, $modal) {
                     $modal.open({
@@ -64,7 +64,7 @@ angular.module('treadstoneApp')
                 parent: 'semester',
                 url: '/{id}/edit',
                 data: {
-                    roles: ['ROLE_ADMIN'],
+                    roles: ['ROLE_USER']
                 },
                 onEnter: ['$stateParams', '$state', '$modal', function ($stateParams, $state, $modal) {
                     $modal.open({

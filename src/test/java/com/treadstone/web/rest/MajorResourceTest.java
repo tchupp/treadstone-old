@@ -136,8 +136,8 @@ public class MajorResourceTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.[*].id").value(hasItem(major.getId().intValue())))
-            .andExpect(jsonPath("$.[*].majorId").value(hasItem(DEFAULT_MAJOR_ID.toString())))
-            .andExpect(jsonPath("$.[*].majorName").value(hasItem(DEFAULT_MAJOR_NAME.toString())));
+            .andExpect(jsonPath("$.[*].majorId").value(hasItem(DEFAULT_MAJOR_ID)))
+            .andExpect(jsonPath("$.[*].majorName").value(hasItem(DEFAULT_MAJOR_NAME)));
     }
 
     @Test
@@ -151,8 +151,8 @@ public class MajorResourceTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(major.getId().intValue()))
-            .andExpect(jsonPath("$.majorId").value(DEFAULT_MAJOR_ID.toString()))
-            .andExpect(jsonPath("$.majorName").value(DEFAULT_MAJOR_NAME.toString()));
+            .andExpect(jsonPath("$.majorId").value(DEFAULT_MAJOR_ID))
+            .andExpect(jsonPath("$.majorName").value(DEFAULT_MAJOR_NAME));
     }
 
     @Test
