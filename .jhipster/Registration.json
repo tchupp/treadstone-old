@@ -1,0 +1,29 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "student",
+            "otherEntityName": "student",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "studentId"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "course",
+            "otherEntityName": "course",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "courseId"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "semester",
+            "otherEntityName": "semester",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "semesterName"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20150903204547",
+    "dto": "no",
+    "pagination": "no"
+}

@@ -1,0 +1,41 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myRegistrationLabel">Create or edit a Registration</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="registration.id" readonly>
+        </div>
+
+
+        <div class="form-group">
+            <label for="field_student">student</label>
+            <select class="form-control" id="field_student" name="student" ng-model="registration.student.id" ng-options="student.id as student.studentId for student in students">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_course">course</label>
+            <select class="form-control" id="field_course" name="course" ng-model="registration.course.id" ng-options="course.id as course.courseId for course in courses">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_semester">semester</label>
+            <select class="form-control" id="field_semester" name="semester" ng-model="registration.semester.id" ng-options="semester.id as semester.semesterName for semester in semesters">
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || editForm.$submitted" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

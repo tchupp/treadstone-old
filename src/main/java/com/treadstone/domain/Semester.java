@@ -22,14 +22,10 @@ public class Semester implements Serializable {
     private Long id;
 
     @NotNull
-
-
     @Column(name = "semester_id", nullable = false)
     private String semesterId;
 
     @NotNull
-
-
     @Column(name = "semester_name", nullable = false)
     private String semesterName;
 
