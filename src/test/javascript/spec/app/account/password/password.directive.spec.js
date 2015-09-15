@@ -1,29 +1,25 @@
 'use strict';
 
-describe('Directive Tests ', function () {
+describe('Password Directive Test ', function () {
 
     beforeEach(module('treadstoneApp'));
+    beforeEach(module('ngMockE2E'));
+    beforeEach(module('scripts/app/account/password/passwordStrengthBar.html'));
 
     var elm, scope, $httpBackend;
-
     beforeEach(inject(function ($compile, $rootScope, $injector) {
         $httpBackend = $injector.get('$httpBackend');
 
+        $httpBackend.whenGET(/api\/account\?cacheBuster=\d+/).respond({});
+
         var html = '<password-strength-bar password-to-check="password"></password-strength-bar>';
         scope = $rootScope.$new();
+
         elm = angular.element(html);
         $compile(elm)(scope);
 
-        $httpBackend.whenGET(/api\/account\?cacheBuster=\d+/).respond({});
-        $httpBackend.whenGET('scripts/app/main/main.html').respond({});
-        $httpBackend.whenGET('scripts/components/navbar/navbar.html').respond({});
+        scope.$digest();
     }));
-
-    afterEach(function () {
-        $httpBackend.flush();
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
-    });
 
     describe('Password strength', function () {
         it("Should display the password strength bar", function () {
@@ -52,7 +48,6 @@ describe('Directive Tests ', function () {
             });
 
             var firstpointStyle = elm.find('ul').children('li')[0].getAttribute('style');
-            dump(firstpointStyle);
             expect(firstpointStyle).toContain('background-color: rgb(153, 255, 0)');
 
             var secondpointStyle = elm.find('ul').children('li')[1].getAttribute('style');
