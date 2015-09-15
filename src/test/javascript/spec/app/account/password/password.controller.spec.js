@@ -1,12 +1,11 @@
 'use strict';
 
-describe('Controllers Tests ', function () {
+describe('Password Controllers Test', function () {
 
     beforeEach(module('treadstoneApp'));
 
     var $scope, $httpBackend, q, Auth;
 
-    // define the mock Auth service
     beforeEach(function () {
         Auth = {
             changePassword: function () {
@@ -23,16 +22,14 @@ describe('Controllers Tests ', function () {
 
     describe('PasswordController', function () {
         it('should show error if passwords do not match', function () {
-            //GIVEN
             $scope.password = 'password1';
             $scope.confirmPassword = 'password2';
-            //WHEN
+
             $scope.changePassword();
-            //THEN
+
             expect($scope.doNotMatch).toBe('ERROR');
         });
         it('should call Service and set OK on Success', function () {
-            //GIVEN
             var pass = 'myPassword';
             $scope.password = pass;
             $scope.confirmPassword = pass;
@@ -44,10 +41,8 @@ describe('Controllers Tests ', function () {
                 return deferred.promise;
             });
 
-            //WHEN
             $scope.changePassword();
 
-            //THEN
             expect($scope.error).toBeNull();
             expect($scope.success).toBe('OK');
         });

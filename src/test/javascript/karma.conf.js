@@ -31,6 +31,8 @@ module.exports = function (config) {
             'main/webapp/scripts/app/app.js',
             'main/webapp/scripts/app/**/*.js',
             'main/webapp/scripts/components/**/*.{js,html}',
+            'main/webapp/scripts/app/**/*.html',
+            'main/webapp/scripts/components/**/*.html',
             'test/javascript/**/!(karma.conf).js'
         ],
 
@@ -60,6 +62,21 @@ module.exports = function (config) {
 
         // Continuous Integration mode
         // if true, it capture browsers, run tests and exit
-        singleRun: false
+        singleRun: false,
+
+        plugins: [
+            'karma-phantomjs-launcher',
+            'karma-chrome-launcher',
+            'karma-jasmine',
+            'karma-ng-html2js-preprocessor'
+        ],
+
+        preprocessors: {
+            'main/webapp/scripts/**/*.html': 'ng-html2js'
+        },
+
+        ngHtml2JsPreprocessor: {
+            stripPrefix: 'main/webapp/'
+        }
     });
 };
