@@ -2,7 +2,6 @@ language: java
 jdk:
   - 'oraclejdk8'
 before_install:
-  - 'sudo apt-get update -qq'
   - 'nvm install 0.12'
   - 'npm install'
   - 'npm install -g grunt-cli'
