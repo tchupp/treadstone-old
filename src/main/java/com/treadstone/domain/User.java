@@ -29,7 +29,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @NotNull
     @Pattern(regexp = "^[a-z0-9]*$")
-    @Size(min = 1, max = 50)
+    @Size(min = 5, max = 50)
     @Column(length = 50, unique = true, nullable = false)
     private String login;
 
@@ -201,11 +201,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
         User user = (User) o;
 
-        if (!login.equals(user.login)) {
-            return false;
-        }
+        return login.equals(user.login);
 
-        return true;
     }
 
     @Override

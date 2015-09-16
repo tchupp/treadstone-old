@@ -147,11 +147,11 @@ public class AccountResourceTest {
     @Transactional
     public void testRegisterValid() throws Exception {
         UserDTO u = new UserDTO(
-            "joe",                  // login
+            "kanga",                // login
             "password",             // password
             "Joe",                  // firstName
             "Shmoe",                // lastName
-            "joe@example.com",      // e-mail
+            "kanga@example.com",    // e-mail
             "en",                   // langKey
             Arrays.asList(AuthoritiesConstants.USER)
         );
@@ -162,7 +162,7 @@ public class AccountResourceTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isCreated());
 
-        Optional<User> user = userRepository.findOneByLogin("joe");
+        Optional<User> user = userRepository.findOneByLogin("kanga");
         assertThat(user.isPresent()).isTrue();
     }
 
@@ -202,7 +202,7 @@ public class AccountResourceTest {
             Arrays.asList(AuthoritiesConstants.USER)
         );
 
-        restUserMockMvc.perform(
+        restMvc.perform(
             post("/api/register")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(u)))
@@ -253,7 +253,7 @@ public class AccountResourceTest {
     public void testRegisterDuplicateEmail() throws Exception {
         // Good
         UserDTO u = new UserDTO(
-            "john",                 // login
+            "johnsr",                 // login
             "password",             // password
             "John",                 // firstName
             "Doe",                  // lastName

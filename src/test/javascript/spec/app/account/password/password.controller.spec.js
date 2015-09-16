@@ -29,6 +29,7 @@ describe('Password Controllers Test', function () {
 
             expect($scope.doNotMatch).toBe('ERROR');
         });
+
         it('should call Service and set OK on Success', function () {
             var pass = 'myPassword';
             $scope.password = pass;
