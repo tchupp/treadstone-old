@@ -19,7 +19,6 @@ app.controller('RegisterController', function ($scope, $timeout, Auth) {
             $scope.error = null;
             $scope.errorUserExists = null;
             $scope.errorEmailExists = null;
-            $scope.errorStudentIdExists = null;
 
             Auth.createAccount($scope.registerAccount).then(function () {
                 $scope.success = 'OK';
@@ -29,8 +28,6 @@ app.controller('RegisterController', function ($scope, $timeout, Auth) {
                     $scope.errorUserExists = 'ERROR';
                 } else if (response.status === 400 && response.data === 'e-mail address already in use') {
                     $scope.errorEmailExists = 'ERROR';
-                }else if (response.status === 400 && response.data === 'student id already in use') {
-                    $scope.errorStudentIdExists = 'ERROR';
                 } else {
                     $scope.error = 'ERROR';
                 }

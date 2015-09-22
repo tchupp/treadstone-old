@@ -128,31 +128,6 @@
                         </p>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="studentId">Student Id</label>
-                    <input type="text" class="form-control" id="studentId" name="studentId"
-                        placeholder="Your student Id"
-                        ng-model="studentId" ng-minlength="5" ng-maxlength="10" required>
-
-                    <div ng-show="form.studentId.$dirty && form.studentId.$invalid">
-                        <p class="help-block"
-                           ng-show="form.studentId.$error.required">
-                            Your student id is required.
-                        </p>
-
-                        <p class="help-block"
-                           ng-show="form.studentId.$error.minlength">
-                            Your student id is required to be at least 5 characters.
-                        </p>
-
-                        <p class="help-block"
-                           ng-show="form.studentId.$error.maxlength">
-                            Your student id cannot be longer than 8 characters.
-                        </p>
-                    </div>
-                </div>
-
                 <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Register</button>
             </form>
             <p></p>
