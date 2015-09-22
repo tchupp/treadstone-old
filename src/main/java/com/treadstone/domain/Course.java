@@ -22,20 +22,14 @@ public class Course implements Serializable {
     private Long id;
 
     @NotNull
-
-
     @Column(name = "course_id", nullable = false)
     private String courseId;
 
     @NotNull
-
-
     @Column(name = "course_name", nullable = false)
     private String courseName;
 
     @NotNull
-
-
     @Column(name = "credits", nullable = false)
     private Integer credits;
 

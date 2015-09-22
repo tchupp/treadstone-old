@@ -5,7 +5,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -20,8 +19,7 @@ public class Student implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(min = 6, max = 6)
-    @Column(name = "student_id", length = 6, nullable = false)
+    @Column(name = "student_id", nullable = false)
     private String studentId;
 
     @ManyToOne

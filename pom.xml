@@ -571,8 +571,8 @@
                     <driver>com.mysql.jdbc.Driver</driver>
                     <url>jdbc:mysql://localhost:3306/Treadstone</url>
                     <defaultSchemaName>Treadstone</defaultSchemaName>
-                    <username>root</username>
-                    <password></password>
+                    <username>Treadstone</username>
+                    <password>jasonborne</password>
                     <referenceUrl>
                         hibernate:spring:com.treadstone.domain?dialect=org.hibernate.dialect.MySQLInnoDBDialect
                     </referenceUrl>

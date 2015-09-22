@@ -14,6 +14,7 @@
              relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150824182838_added_entity_Student.xml"
              relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20150903204547_added_entity_Registration.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150903204547_added_entity_Registration.xml"
+             relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

@@ -39,8 +39,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class StudentResourceTest {
 
-    private static final String DEFAULT_STUDENT_ID = "6CHARS";
-    private static final String UPDATED_STUDENT_ID = "UPDATE";
+    private static final String DEFAULT_STUDENT_ID = "SAMPLE_TEXT";
+    private static final String UPDATED_STUDENT_ID = "UPDATED_TEXT";
 
     @Inject
     private StudentRepository studentRepository;
