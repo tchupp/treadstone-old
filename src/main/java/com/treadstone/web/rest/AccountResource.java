@@ -8,6 +8,7 @@ import com.treadstone.repository.PersistentTokenRepository;
 import com.treadstone.repository.UserRepository;
 import com.treadstone.security.SecurityUtils;
 import com.treadstone.service.MailService;
+import com.treadstone.service.StudentService;
 import com.treadstone.service.UserService;
 import com.treadstone.web.rest.dto.UserDTO;
 import org.apache.commons.lang.StringUtils;
@@ -43,6 +44,9 @@ public class AccountResource {
     private UserService userService;
 
     @Inject
+    private StudentService studentService;
+
+    @Inject
     private PersistentTokenRepository persistentTokenRepository;
 
     @Inject
@@ -69,6 +73,7 @@ public class AccountResource {
                             request.getServerName() +              // "myhost"
                             ":" +                                  // ":"
                             request.getServerPort();               // "80"
+                        studentService.createStudent(user);
 
                         mailService.sendActivationEmail(user, baseUrl);
                         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -83,9 +88,9 @@ public class AccountResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<String> activateAccount(@RequestParam(value = "key") String key) {
+    public ResponseEntity<?> activateAccount(@RequestParam(value = "key") String key) {
         return Optional.ofNullable(userService.activateRegistration(key))
-            .map(user -> new ResponseEntity<String>(HttpStatus.OK))
+            .map(user -> new ResponseEntity<>(HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }
 
@@ -111,17 +116,16 @@ public class AccountResource {
     public ResponseEntity<UserDTO> getAccount() {
         return Optional.ofNullable(userService.getUserWithAuthorities())
             .map(user -> {
-                return new ResponseEntity<>(
-                    new UserDTO(
-                        user.getLogin(),
-                        null,
-                        user.getFirstName(),
-                        user.getLastName(),
-                        user.getEmail(),
-                        user.getLangKey(),
-                        user.getAuthorities().stream().map(Authority::getName)
-                            .collect(Collectors.toList())),
-                    HttpStatus.OK);
+                UserDTO userDTO = new UserDTO(
+                    user.getLogin(),
+                    null,
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getEmail(),
+                    user.getLangKey(),
+                    user.getAuthorities().stream().map(Authority::getName)
+                        .collect(Collectors.toList()));
+                return new ResponseEntity<>(userDTO, HttpStatus.OK);
             })
             .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }
@@ -133,14 +137,14 @@ public class AccountResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<String> saveAccount(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> saveAccount(@RequestBody UserDTO userDTO) {
         return userRepository
             .findOneByLogin(userDTO.getLogin())
             .filter(u -> u.getLogin().equals(SecurityUtils.getCurrentLogin()))
             .map(u -> {
                 userService.updateUserInformation(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
                     userDTO.getLangKey());
-                return new ResponseEntity<String>(HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.OK);
             })
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }
@@ -193,11 +197,11 @@ public class AccountResource {
     @Timed
     public void invalidateSession(@PathVariable String series) throws UnsupportedEncodingException {
         String decodedSeries = URLDecoder.decode(series, "UTF-8");
-        userRepository.findOneByLogin(SecurityUtils.getCurrentLogin()).ifPresent(u -> {
-            persistentTokenRepository.findByUser(u).stream()
-                .filter(persistentToken -> StringUtils.equals(persistentToken.getSeries(), decodedSeries))
-                .findAny().ifPresent(t -> persistentTokenRepository.delete(decodedSeries));
-        });
+        userRepository.findOneByLogin(SecurityUtils.getCurrentLogin()).ifPresent(u ->
+                persistentTokenRepository.findByUser(u).stream()
+                    .filter(persistentToken -> StringUtils.equals(persistentToken.getSeries(), decodedSeries))
+                    .findAny().ifPresent(t -> persistentTokenRepository.delete(decodedSeries))
+        );
     }
 
     @RequestMapping(value = "/account/reset_password/init",
@@ -223,12 +227,12 @@ public class AccountResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<String> finishPasswordReset(@RequestParam(value = "key") String key, @RequestParam(value = "newPassword") String newPassword) {
+    public ResponseEntity<?> finishPasswordReset(@RequestParam(value = "key") String key, @RequestParam(value = "newPassword") String newPassword) {
         if (!checkPasswordLength(newPassword)) {
             return new ResponseEntity<>("Incorrect password", HttpStatus.BAD_REQUEST);
         }
         return userService.completePasswordReset(newPassword, key)
-            .map(user -> new ResponseEntity<String>(HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+            .map(user -> new ResponseEntity<>(HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }
 
     private boolean checkPasswordLength(String password) {

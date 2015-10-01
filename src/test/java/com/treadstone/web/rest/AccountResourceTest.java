@@ -4,15 +4,18 @@ import com.treadstone.Application;
 import com.treadstone.domain.Authority;
 import com.treadstone.domain.User;
 import com.treadstone.repository.AuthorityRepository;
+import com.treadstone.repository.StudentRepository;
 import com.treadstone.repository.UserRepository;
 import com.treadstone.security.AuthoritiesConstants;
 import com.treadstone.service.MailService;
+import com.treadstone.service.StudentService;
 import com.treadstone.service.UserService;
 import com.treadstone.web.rest.dto.UserDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -33,8 +36,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -57,10 +59,16 @@ public class AccountResourceTest {
     private AuthorityRepository authorityRepository;
 
     @Inject
+    private StudentRepository studentRepository;
+
+    @Inject
     private UserService userService;
 
     @Mock
     private UserService mockUserService;
+
+    @Mock
+    private StudentService mockStudentService;
 
     @Mock
     private MailService mockMailService;
@@ -78,11 +86,13 @@ public class AccountResourceTest {
         ReflectionTestUtils.setField(accountResource, "userRepository", userRepository);
         ReflectionTestUtils.setField(accountResource, "userService", userService);
         ReflectionTestUtils.setField(accountResource, "mailService", mockMailService);
+        ReflectionTestUtils.setField(accountResource, "studentService", mockStudentService);
 
         AccountResource accountUserMockResource = new AccountResource();
         ReflectionTestUtils.setField(accountUserMockResource, "userRepository", userRepository);
         ReflectionTestUtils.setField(accountUserMockResource, "userService", mockUserService);
         ReflectionTestUtils.setField(accountUserMockResource, "mailService", mockMailService);
+        ReflectionTestUtils.setField(accountUserMockResource, "studentService", mockStudentService);
 
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource).build();
         this.restUserMockMvc = MockMvcBuilders.standaloneSetup(accountUserMockResource).build();
@@ -164,6 +174,8 @@ public class AccountResourceTest {
 
         Optional<User> user = userRepository.findOneByLogin("kanga");
         assertThat(user.isPresent()).isTrue();
+
+        verify(mockStudentService).createStudent(user.get());
     }
 
     @Test
@@ -187,6 +199,8 @@ public class AccountResourceTest {
 
         Optional<User> user = userRepository.findOneByEmail("funky@example.com");
         assertThat(user.isPresent()).isFalse();
+
+        verify(mockStudentService, times(0)).createStudent(Mockito.any());
     }
 
     @Test
@@ -210,6 +224,8 @@ public class AccountResourceTest {
 
         Optional<User> user = userRepository.findOneByLogin("bob");
         assertThat(user.isPresent()).isFalse();
+
+        verify(mockStudentService, times(0)).createStudent(Mockito.any());
     }
 
     @Test
@@ -237,6 +253,8 @@ public class AccountResourceTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isCreated());
 
+        Optional<User> user = userRepository.findOneByEmail("alice@example.com");
+
         // Duplicate login
         restMvc.perform(
             post("/api/register")
@@ -246,6 +264,8 @@ public class AccountResourceTest {
 
         Optional<User> userDup = userRepository.findOneByEmail("alicejr@example.com");
         assertThat(userDup.isPresent()).isFalse();
+
+        verify(mockStudentService).createStudent(user.get());
     }
 
     @Test
@@ -273,6 +293,8 @@ public class AccountResourceTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isCreated());
 
+        Optional<User> user = userRepository.findOneByLogin("johnsr");
+
         // Duplicate e-mail
         restMvc.perform(
             post("/api/register")
@@ -282,6 +304,8 @@ public class AccountResourceTest {
 
         Optional<User> userDup = userRepository.findOneByLogin("johnjr");
         assertThat(userDup.isPresent()).isFalse();
+
+        verify(mockStudentService).createStudent(user.get());
     }
 
     @Test
@@ -303,9 +327,11 @@ public class AccountResourceTest {
                 .content(TestUtil.convertObjectToJsonBytes(u)))
             .andExpect(status().isCreated());
 
-        Optional<User> userDup = userRepository.findOneByLogin("badguy");
-        assertThat(userDup.isPresent()).isTrue();
-        assertThat(userDup.get().getAuthorities()).hasSize(1)
+        Optional<User> user = userRepository.findOneByLogin("badguy");
+        assertThat(user.isPresent()).isTrue();
+        assertThat(user.get().getAuthorities()).hasSize(1)
             .containsExactly(authorityRepository.findOne(AuthoritiesConstants.USER));
+
+        verify(mockStudentService).createStudent(user.get());
     }
 }
