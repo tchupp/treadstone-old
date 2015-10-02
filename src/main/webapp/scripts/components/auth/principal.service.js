@@ -6,6 +6,9 @@ angular.module('treadstoneApp')
             _authenticated = false;
 
         return {
+            isAdmin: function () {
+                return this.isInRole("ROLE_ADMIN");
+            },
             isIdentityResolved: function () {
                 return angular.isDefined(_identity);
             },
@@ -19,7 +22,7 @@ angular.module('treadstoneApp')
 
                 return this.identity().then(function (_id) {
                     return _id.roles && _id.roles.indexOf(role) !== -1;
-                }, function (err) {
+                }, function () {
                     return false;
                 });
             },

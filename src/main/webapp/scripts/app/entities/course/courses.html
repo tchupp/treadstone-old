@@ -2,11 +2,11 @@
 
     <h2>Courses</h2>
 
-    <div class="container">
+    <div class="container" ng-if="isAdmin">
         <div class="row">
             <div class="col-md-4">
                 <button class="btn btn-primary" ui-sref="course.new">
-                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Course</span>
+                    <span class="glyphicon glyphicon-flash"></span><span>Create a new Course</span>
                 </button>
             </div>
         </div>
@@ -50,8 +50,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="course in courses">
-                <td><a ui-sref="course.detail({id:course.id})">{{course.id}}</a></td>
-                <td>{{course.courseId}}</td>
+                <td><a ui-sref="course.detail({id:course.id})">{{course.courseId}}</a></td>
                 <td>{{course.courseName}}</td>
                 <td>{{course.credits}}</td>
                 <td>
@@ -62,12 +61,14 @@
                     </button>
                     <button type="submit"
                             ui-sref="course.edit({id:course.id})"
-                            class="btn btn-primary btn-sm">
+                            class="btn btn-primary btn-sm"
+                            ng-if="isAdmin">
                         <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
                     </button>
                     <button type="submit"
                             ng-click="delete(course.id)"
-                            class="btn btn-danger btn-sm">
+                            class="btn btn-danger btn-sm"
+                            ng-if="isAdmin">
                         <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
                     </button>
                 </td>
