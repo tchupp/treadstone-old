@@ -2,7 +2,9 @@ package com.treadstone.web.rest;
 
 import com.treadstone.Application;
 import com.treadstone.domain.Student;
+import com.treadstone.domain.User;
 import com.treadstone.repository.StudentRepository;
+import com.treadstone.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,11 +48,16 @@ public class StudentResourceTest {
     private StudentRepository studentRepository;
 
     @Inject
+    private UserService userService;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     private MockMvc restStudentMockMvc;
 
     private Student student;
+
+    private User user;
 
     @PostConstruct
     public void setup() {
@@ -64,6 +71,8 @@ public class StudentResourceTest {
     public void initTest() {
         student = new Student();
         student.setStudentId(DEFAULT_STUDENT_ID);
+
+        user = userService.createUserInformation("johndoe", "johndoe", "John", "Doe", "john.doe@localhost", "en-US");
     }
 
     @Test
@@ -125,6 +134,22 @@ public class StudentResourceTest {
 
         // Get the student
         restStudentMockMvc.perform(get("/api/students/{id}", student.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.id").value(student.getId().intValue()))
+            .andExpect(jsonPath("$.studentId").value(DEFAULT_STUDENT_ID));
+    }
+
+    @Test
+    @Transactional
+    public void getStudentByUser() throws Exception {
+        student.setUser(user);
+        // Initialize the database
+        studentRepository.saveAndFlush(student);
+
+
+        // Get the student
+        restStudentMockMvc.perform(get("/api/studentbyuser/{id}", user.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(student.getId().intValue()))

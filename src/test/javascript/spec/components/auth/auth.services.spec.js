@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Services Tests ', function () {
+describe('Auth Services Tests ', function () {
 
     beforeEach(module('treadstoneApp'));
 
@@ -18,6 +18,7 @@ describe('Services Tests ', function () {
             $httpBackend.whenGET('scripts/components/navbar/navbar.html').respond({});
             $httpBackend.expectPOST(/api\/logout\?cacheBuster=\d+/).respond(200, '');
         }));
+
         //make sure no expectations were missed in your tests.
         //(e.g. expectGET or expectPOST)
         afterEach(function () {

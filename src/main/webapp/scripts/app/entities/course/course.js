@@ -8,7 +8,7 @@ angular.module('treadstoneApp')
                 url: '/courses',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'Courses'
+                    pageTitle: 'Course List'
                 },
                 views: {
                     'content@': {

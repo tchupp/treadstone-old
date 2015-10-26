@@ -52,11 +52,8 @@ angular.module('treadstoneApp')
                         threadDump: function () {
                             return data;
                         }
-
                     }
                 });
             });
         };
-
-
     });

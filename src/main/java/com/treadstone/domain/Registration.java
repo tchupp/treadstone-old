@@ -74,9 +74,8 @@ public class Registration implements Serializable {
 
         Registration registration = (Registration) o;
 
-        if ( ! Objects.equals(id, registration.id)) return false;
+        return Objects.equals(id, registration.id);
 
-        return true;
     }
 
     @Override

@@ -106,4 +106,18 @@ public class StudentResource {
         studentRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("student", id.toString())).build();
     }
+
+    /**
+     * GET  /studentbyuser/:id -> get the "id" student.
+     */
+    @RequestMapping(value = "/studentbyuser/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Student> getByUser(@PathVariable Long id) {
+        log.debug("REST request to get Student By User : {}", id);
+        return studentRepository.findOneByUserId(id)
+            .map(student -> new ResponseEntity<>(student, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 }

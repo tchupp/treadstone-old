@@ -68,11 +68,11 @@ public class AccountResource {
                         User user = userService.createUserInformation(userDTO.getLogin(), userDTO.getPassword(),
                             userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail().toLowerCase(),
                             userDTO.getLangKey());
-                        String baseUrl = request.getScheme() + // "http"
-                            "://" +                                // "://"
-                            request.getServerName() +              // "myhost"
-                            ":" +                                  // ":"
-                            request.getServerPort();               // "80"
+                        String baseUrl = request.getScheme() +      // "http"
+                            "://" +                                 // "://"
+                            request.getServerName() +               // "myhost"
+                            ":" +                                   // ":"
+                            request.getServerPort();                // "80"
                         studentService.createStudent(user);
 
                         mailService.sendActivationEmail(user, baseUrl);
