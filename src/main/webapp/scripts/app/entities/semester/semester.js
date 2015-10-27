@@ -7,7 +7,7 @@ angular.module('treadstoneApp')
                 parent: 'entity',
                 url: '/semesters',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['ROLE_ADMIN'],
                     pageTitle: 'Semesters'
                 },
                 views: {
@@ -22,7 +22,7 @@ angular.module('treadstoneApp')
                 parent: 'entity',
                 url: '/semester/{id}',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['ROLE_ADMIN'],
                     pageTitle: 'Semester'
                 },
                 views: {
@@ -41,7 +41,7 @@ angular.module('treadstoneApp')
                 parent: 'semester',
                 url: '/new',
                 data: {
-                    roles: ['ROLE_USER']
+                    roles: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$modal', function ($stateParams, $state, $modal) {
                     $modal.open({
@@ -64,7 +64,7 @@ angular.module('treadstoneApp')
                 parent: 'semester',
                 url: '/{id}/edit',
                 data: {
-                    roles: ['ROLE_USER']
+                    roles: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$modal', function ($stateParams, $state, $modal) {
                     $modal.open({
